@@ -15,11 +15,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|tsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        use: [
+          'babel-loader',
+          'ts-loader'
+        ]
       },
       {
         test: /\.(sc|c)ss$/,
@@ -35,11 +36,14 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ]
+  },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     port: 3000,
     historyApiFallback: true,
-    open: true,
+    // open: true,
     stats: "errors-only",
     proxy: {
       '/api': 'http://localhost:8080',

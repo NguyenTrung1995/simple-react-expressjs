@@ -3,6 +3,8 @@ var bodyParser = require("body-parser");
 
 const app = express();
 
+const user = require('./user.js');
+
 app.use(express.static("dist"));
 app.use(bodyParser.json());
 
@@ -11,13 +13,27 @@ app.get('/hehe', (req, res) => {
 })
 
 app.post("/api/signin", function(req, res) {
-  var user_name = req.body.email;
+  var email = req.body.email;
   var password = req.body.password;
-  if (user_name === "admin@gmail.com" && password === "admin") {
-    console.log('success');
-    res.send("success");
-  } else {
-    res.send("Failure");
+  user.validateSignIn(email, password, result => {
+    if (result) {
+      res.send('success');
+    }
+    else {
+      res.send('fail');
+    }
+  })
+});
+
+app.post("/api/signup", function(req, res) {
+  var name = req.body.name;
+  var email = req.body.email;
+  var password = req.body.password;
+  if(name && email && password) {
+      user.signup(name, email, password)
+  }
+  else {
+    res.send('Failure');
   }
 });
 

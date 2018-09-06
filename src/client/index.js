@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import Signin from "./js/containers/signin.js";
 import Signup from "./js/containers/signup.js";
 import Error from "./js/containers/error.js";
+import Home from "./js/containers/home.tsx";
 
 ReactDOM.render(
     <BrowserRouter>
@@ -15,6 +16,7 @@ ReactDOM.render(
             <Switch>
                 <Route exact={true} path='/' component={Signin}/>
                 <Route path='/signup' component={Signup}/>
+                <Route path='/home' component={Home}/>
                 <Route component={Error}/>
             </Switch>
         </div>

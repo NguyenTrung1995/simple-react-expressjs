@@ -29,24 +29,26 @@ class Signin extends React.Component {
             email: this.state.email,
             password: this.state.password
           })
-          .then(function (response) {
-            console.log(response);
+          .then(function (res) {
+            if (res.data === 'success') {
+                window.location.assign('http://localhost:3000/home');
+            }
           })
-          .catch(function (error) {
-            console.log(error);
+          .catch(function (err) {
+            console.log(err);
           });
     }
     
     render() {
         return (
-            <form className="form-signin" onSubmit={this.signIn}>
+            <form className="form-signin">
                 <h2 className="form-signin-heading">Đăng nhập</h2>
                 <label htmlFor="inputEmail" className="sr-only">Nhập địa chỉ email
                 </label>
                 <input type="email" onChange={this.handleEmailChange} id="inputEmail" className="form-control" placeholder="Email" required autoFocus />
                 <label htmlFor="inputPassword" className="sr-only">Mật khẩu</label>
                 <input type="password" onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Mật khẩu" required />
-                <button className="btn btn-lg btn-primary btn-block" type="submit">Đăng nhập</button>
+                <button className="btn btn-lg btn-primary btn-block" onClick={this.signIn} type="button">Đăng nhập</button>
             </form>
         );
     }
