@@ -30,15 +30,18 @@ class Signin extends React.Component {
             password: this.state.password
           })
           .then(function (res) {
-            if (res.data === 'success') {
+            if (res.data) {
                 window.location.assign('http://localhost:3000/home');
+            }
+            else {
+                window.location.assign('http://localhost:3000/');
             }
           })
           .catch(function (err) {
-            console.log(err);
+                console.log(err);
           });
     }
-    
+
     render() {
         return (
             <form className="form-signin">

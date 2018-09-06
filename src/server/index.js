@@ -1,26 +1,31 @@
 const express = require("express");
 var bodyParser = require("body-parser");
-
+var session = require('express-session');
 const app = express();
 
 const user = require('./user.js');
 
 app.use(express.static("dist"));
 app.use(bodyParser.json());
+app.use(session({ secret: 'my-secret' }));
 
 app.get('/hehe', (req, res) => {
     res.send('hehe');
 })
 
 app.post("/api/signin", function(req, res) {
+  sessions = req.session;
+  console.log(sessions);
   var email = req.body.email;
   var password = req.body.password;
   user.validateSignIn(email, password, result => {
     if (result) {
-      res.send('success');
+      sessions.username = email;
+      console.log(sessions.username);
+      res.send('true');
     }
     else {
-      res.send('fail');
+      res.send('false');
     }
   })
 });
