@@ -35,7 +35,7 @@ app.post("/api/signin", function(req, res) {
 app.get('/api/getInfo', (req, res) => {
   if (req.session.username) {
     res.setHeader('Content-Type', 'text/html');
-    res.end('true');
+    res.end(req.session.username);
   } else {
     res.end('false');
   }
