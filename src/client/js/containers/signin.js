@@ -31,10 +31,10 @@ class Signin extends React.Component {
           })
           .then(function (res) {
             if (res.data) {
-                window.location.assign('http://localhost:3000/home');
+                window.location.assign('http://localhost:3000/');
             }
             else {
-                window.location.assign('http://localhost:3000/');
+                window.location.assign('http://localhost:3000/signin');
             }
           })
           .catch(function (err) {

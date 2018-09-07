@@ -7,21 +7,23 @@ const user = require('./user.js');
 
 app.use(express.static("dist"));
 app.use(bodyParser.json());
-app.use(session({ secret: 'my-secret' }));
+app.use(session({ 
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 1000*60*60*24 }
+}));
 
 app.get('/hehe', (req, res) => {
     res.send('hehe');
 })
 
 app.post("/api/signin", function(req, res) {
-  sessions = req.session;
-  console.log(sessions);
   var email = req.body.email;
   var password = req.body.password;
   user.validateSignIn(email, password, result => {
     if (result) {
-      sessions.username = email;
-      console.log(sessions.username);
+      req.session.username = email;
       res.send('true');
     }
     else {
@@ -29,6 +31,15 @@ app.post("/api/signin", function(req, res) {
     }
   })
 });
+
+app.get('/api/getInfo', (req, res) => {
+  if (req.session.username) {
+    res.setHeader('Content-Type', 'text/html');
+    res.end('true');
+  } else {
+    res.end('false');
+  }
+})
 
 app.post("/api/signup", function(req, res) {
   var name = req.body.name;
