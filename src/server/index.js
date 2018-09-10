@@ -24,7 +24,7 @@ app.post("/api/signin", function(req, res) {
   user.validateSignIn(email, password, result => {
     if (result) {
       req.session.username = email;
-      res.send('true');
+      res.send(email);
     }
     else {
       res.send('false');

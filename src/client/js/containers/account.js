@@ -11,15 +11,15 @@ class Account extends React.Component {
         return (
             <div>
                 <p>Hello Account</p>
-                <p>{this.props.state.session}</p>
+                <p>{this.props.session}</p>
             </div>
         );
     }
 }
 
 function mapStateToProps(state) {
-    console.log(state);
-    return { state }
+    const session = state.login.session;
+    return { session }
 } 
 
 export default connect(mapStateToProps)(Account);

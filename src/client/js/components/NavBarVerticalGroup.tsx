@@ -7,7 +7,7 @@ class NavBarVerticalGroup extends React.Component {
         return (
             <ul className="navbarvertical-group">
                 <NavBarVertical />
-                <NavBarVertical></NavBarVertical>
+                <NavBarVertical />
             </ul>
         );
     }

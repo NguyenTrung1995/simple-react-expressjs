@@ -1,6 +1,8 @@
 import * as React from 'react';
 import axios from 'axios';
 import '../../css/signin.scss';
+import { Redirect } from 'react-router';
+import { connect } from 'react-redux';
 
 class Signin extends React.Component {
 
@@ -28,21 +30,20 @@ class Signin extends React.Component {
             email: this.state.email,
             password: this.state.password
           })
-          .then(function (res) {
+          .then((res) => {
             if (res.data) {
-                window.location.assign('http://localhost:3000/');
-            }
-            else {
-                window.location.assign('http://localhost:3000/signin');
+                const dispatch = this.props.dispatch;
+                dispatch({ type: 'LOG_IN' , session: res.data});
             }
           })
-          .catch(function (err) {
+          .catch((err) => {
                 console.log(err);
           });
     }
 
     render() {
         return (
+            this.props.isLogin ? <Redirect to="/" /> :
             <form className="form-signin">
                 <h2 className="form-signin-heading">Đăng nhập</h2>
                 <label htmlFor="inputEmail" className="sr-only">Nhập địa chỉ email
@@ -56,4 +57,9 @@ class Signin extends React.Component {
     }
 }
 
-export default Signin;
+function mapStateToProps(state) {
+    const isLogin = state.login.isLogin;
+    return { isLogin };
+}
+
+export default connect(mapStateToProps)(Signin);
