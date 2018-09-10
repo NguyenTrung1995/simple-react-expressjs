@@ -10,8 +10,11 @@ class Account extends React.Component {
     render() {
         return (
             <div>
-                <p>Hello Account</p>
-                <p>{this.props.session}</p>
+                { this.props.session ? 
+                    <div>Welcome {this.props.session}</div>
+                    :
+                    <div>Account Empty</div>
+                }
             </div>
         );
     }

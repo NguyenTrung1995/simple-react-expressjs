@@ -14,10 +14,6 @@ app.use(session({
   cookie: { maxAge: 1000*60*60*24 }
 }));
 
-app.get('/hehe', (req, res) => {
-    res.send('hehe');
-})
-
 app.post("/api/signin", function(req, res) {
   var email = req.body.email;
   var password = req.body.password;
@@ -31,6 +27,11 @@ app.post("/api/signin", function(req, res) {
     }
   })
 });
+
+app.get("/api/signout", (req, res) => {
+  req.session.username = undefined;
+  res.send('true');
+})
 
 app.get('/api/getInfo', (req, res) => {
   if (req.session.username) {
