@@ -23,7 +23,6 @@ class ProductListItem extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state.cart);
     return { cart: state.cart }
 }
 
@@ -31,9 +30,6 @@ function mapDispatchToProps(dispatch) {
     return {
         addToCart: (item) => {
             dispatch({ type: 'ADD_ITEM', payload: item })
-        },
-        removeFromCart: (item) => {
-            dispatch({ type: 'REMOVE_ITEM', payload: item })
         }
     }
 }
