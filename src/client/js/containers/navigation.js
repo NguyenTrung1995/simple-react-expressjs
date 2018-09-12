@@ -25,7 +25,15 @@ class Navigation extends React.Component {
                 <li><Link to="/account">Account</Link></li>
                 <li><Link to="/signup">Signup</Link></li>
                 <li><Link to="/styleguide">Style Guide</Link></li>
-                <li>{ this.props.isLogin === false ? <Link to="/signin">Sign In</Link> : <a onClick={this.signOut}>Sign Out</a> }</li>
+                { this.props.isLogin===false &&
+                    <li><Link to="/signin">Sign In</Link></li>
+                }
+                { this.props.isLogin &&
+                    <li><Link to="/cart">Cart({this.props.cartLength})</Link></li>
+                }
+                { this.props.isLogin &&
+                    <li><a onClick={this.signOut}>Sign Out</a></li>
+                }
             </ul>
         );
     }
@@ -33,7 +41,8 @@ class Navigation extends React.Component {
 
 function mapStateToProps(state) {
     const isLogin = state.login.isLogin;
-    return {isLogin};
+    const cartLength = state.cart.length;
+    return {isLogin, cartLength};
 }
 
 export default connect(mapStateToProps)(Navigation);
