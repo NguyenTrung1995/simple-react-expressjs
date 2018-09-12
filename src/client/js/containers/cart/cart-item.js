@@ -23,7 +23,7 @@ class CartItem extends React.Component {
     }
 
     componentDidMount() {
-        console.log('haha');
+        console.log('haha11');
     }
 
     render() {
