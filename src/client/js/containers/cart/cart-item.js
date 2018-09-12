@@ -16,14 +16,14 @@ class CartItem extends React.Component {
     }
 
     decreaseItem() {
-        this.setState({ count: this.state.count > 0 ? this.state.count - 1 : 0 });
-        if (this.state.count === 0) {
-            this.props.removeFromCart(this.props.item);
-        }
-    }
-
-    componentDidMount() {
-        console.log('haha11');
+        this.setState((state, props) => {
+            if (state.count - 1 <= 0) {
+                props.removeFromCart(props.item);
+            }
+            return {
+                count: state.count - 1
+            }
+        });
     }
 
     render() {
