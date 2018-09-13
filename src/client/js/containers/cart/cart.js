@@ -12,6 +12,9 @@ class Cart extends React.Component {
     }
 
     render() {
+        const totalPrice = this.props.cart.reduce((accumulator, currentItem) => {
+            return accumulator + currentItem.quantity * currentItem.price;
+        }, 0)
         return (
             <div>
                 { 
@@ -24,6 +27,7 @@ class Cart extends React.Component {
                         />
                     )
                 }
+                <div>Total Price: {totalPrice}</div>
             </div>
         );
     }
