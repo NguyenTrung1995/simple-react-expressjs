@@ -15,6 +15,7 @@ class ProductListItem extends React.Component {
                     <ProductItem key={product.id} 
                                  product={product} 
                                  addToCart={this.props.addToCart}
+                                 cart={this.props.cart}
                     /> )
                 }
             </div>
