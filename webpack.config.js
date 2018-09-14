@@ -41,7 +41,7 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    port: 3000,
+    port: 4000,
     historyApiFallback: true,
     // open: true,
     stats: "errors-only",
@@ -52,8 +52,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin([outputDirectory]),
     new HtmlWebpackPlugin({
-      template: './public/index.html',
-      favicon: './public/favicon.ico'
+      template: './public/index.html'
     }),
     new MiniCssExtractPlugin({
       filename: 'style.css'
