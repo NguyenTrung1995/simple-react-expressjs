@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import CartItem from './cart-item';
+import ModalCart from '../../components/ModalCart';
 
 function sort(items) {
     return items.sort((a, b) => a.id < b.id)
@@ -10,6 +11,8 @@ class Cart extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    handleChangeValue = e => console.log(e.target.value);
 
     render() {
         const totalPrice = this.props.cart.reduce((accumulator, currentItem) => {
@@ -28,13 +31,16 @@ class Cart extends React.Component {
                     )
                 }
                 <div>Total Price: {totalPrice}</div>
+                <div>
+                    <button className="btn btn-green">Check out</button>
+                    <ModalCart/>
+                </div>
             </div>
         );
     }
 }
 
 function mapStateToProps(state) {
-    console.log(state.cart);
     return { cart: state.cart };
 }
 

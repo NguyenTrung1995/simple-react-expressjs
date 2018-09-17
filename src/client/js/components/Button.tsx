@@ -6,9 +6,9 @@ class Button extends React.Component {
         super(props);
     }
     public render() {
-        const { color, text } = this.props;
+        const { color, text} = this.props;
         return (
-            <button className={"btn--login btn--login-" + color}>{text}</button>
+            <button className={"btn btn-"+ color}>{text}</button>
         );
     }
 }

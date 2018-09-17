@@ -11,7 +11,7 @@ class FormInput extends React.Component<any, any> {
         return (
             <div className="form-input">
                 <label>{this.props.nameLabel}</label>
-                <input type="text" placeholder={this.props.nameInput}></input>
+                <input type="text" placeholder={this.props.nameInput} onChange={this.props.onChangeValue}></input>
             </div>
         );
     }

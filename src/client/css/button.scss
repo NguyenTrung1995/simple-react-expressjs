@@ -1,13 +1,20 @@
-.btn--login {
+.btn {
     text-align: center;
-    color: red;
     height: 60px;
     width: 150px;
-    &-yellow {
-        background-color: rgba(0, 255, 42, 0.411);
+    &-red {
+        background-color: red;
+        color: white;
     }
 
-    &-grey {
+    &-white {
         background-color: gray;
+        color: red;
+    }
+
+    &-green {
+        background-color: green;
+        color: white;
     }
 }
+
