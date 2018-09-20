@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import CartItem from './cart-item';
 import ModalCart from '../../components/ModalCart';
 
@@ -10,9 +11,36 @@ function sort(items) {
 class Cart extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            isCheckOutModal: false
+        }
+        this.openCheckOutModal = this.openCheckOutModal.bind(this);
+        this.closeCheckOutModal = this.closeCheckOutModal.bind(this);
     }
 
-    handleChangeValue = e => console.log(e.target.value);
+    orderFunction = (orderInfor) => {
+        axios.post('/api/order', {
+                name: orderInfor.fullname,
+                phone: orderInfor.phoneNumber,
+                email: orderInfor.email,
+                address: orderInfor.address,
+                package: [...this.props.cart]
+            })
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    openCheckOutModal = () => {
+        this.setState({ isCheckOutModal: true })
+    }
+
+    closeCheckOutModal = () => {
+        this.setState({ isCheckOutModal: false })
+    }
 
     render() {
         const totalPrice = this.props.cart.reduce((accumulator, currentItem) => {
@@ -32,8 +60,16 @@ class Cart extends React.Component {
                 }
                 <div>Total Price: {totalPrice}</div>
                 <div>
-                    <button className="btn btn-green">Check out</button>
-                    <ModalCart/>
+                    <button className="btn btn-green" onClick={this.openCheckOutModal}>Check out</button>
+                    { this.state.isCheckOutModal &&
+                        <ModalCart
+                            cart={this.props.cart}
+                            totalPrice = {totalPrice}
+                            orderFunction={this.orderFunction}
+                            closeCheckOutModal = {this.closeCheckOutModal}
+                            isCheckOutModal = {this.state.isCheckOutModal}
+                        />
+                    }
                 </div>
             </div>
         );

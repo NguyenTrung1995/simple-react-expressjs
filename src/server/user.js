@@ -7,7 +7,7 @@ module.exports = {
     MongoClient.connect(
       url,
       (error, client) => {
-        const db = client.db("Blog");
+        const db = client.db("WatchSale");
         db.collection("user").insertOne(
           {
             name: name,
@@ -26,7 +26,7 @@ module.exports = {
     MongoClient.connect(
       url,
       (error, client) => {
-        const db = client.db("Blog");
+        const db = client.db("WatchSale");
         db.collection("user").findOne(
           { email: username, password: password },
           function(err, result) {

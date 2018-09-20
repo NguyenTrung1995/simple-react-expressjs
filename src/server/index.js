@@ -4,6 +4,7 @@ var session = require('express-session');
 const app = express();
 
 const user = require('./user.js');
+const order = require('./order.js');
 
 app.use(express.static("dist"));
 app.use(bodyParser.json());
@@ -54,4 +55,16 @@ app.post("/api/signup", function(req, res) {
   }
 });
 
-app.listen(8080, () => console.log("Listening on port 8080!"));
+app.post("/api/order", function(req, res) {
+  console.log(req.body);
+  var name = req.body.name;
+  var phone = req.body.phone;
+  var email = req.body.email;
+  var address = req.body.address;
+  var package = req.body.package;
+
+  order.order(name, phone, email, address, package);
+  res.send('done');
+})
+
+app.listen(5000, () => console.log("Listening on port 5000!"));

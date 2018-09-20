@@ -46,7 +46,7 @@ module.exports = {
     // open: true,
     stats: "errors-only",
     proxy: {
-      '/api': 'http://localhost:8080',
+      '/api': 'http://localhost:5000',
     }
   },
   plugins: [

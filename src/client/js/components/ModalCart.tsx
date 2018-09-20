@@ -2,8 +2,9 @@ import * as React from 'react';
 import FormInput from './FormInput';
 
 import '../../css/organisms/modal-cart.scss';
+import Button from './Button';
 
-class ModalCart extends React.Component<any, any> {
+class ModalCart extends React.Component {
     
     constructor(props) {
         super(props);
@@ -19,28 +20,45 @@ class ModalCart extends React.Component<any, any> {
         this.onChangeAddress = this.onChangeAddress.bind(this);
     }
 
-    onChangeFullname(e) {
+    public onChangeFullname(e) {
         this.setState({ fullname: e.target.value });
     }
-    onChangePhoneNumber(e) {
+    public onChangePhoneNumber(e) {
         this.setState({ phoneNumber: e.target.value });
     }
-    onChangeEmail(e) {
+    public onChangeEmail(e) {
         this.setState({ email: e.target.value });
     }
-    onChangeAddress(e) {
+    public onChangeAddress(e) {
         this.setState({ address: e.target.value });
     }
 
+    public callbackFn = () => {
+        this.props.orderFunction(this.state);
+    }
+
     public render() {
-        console.log(this.state);
         return (
-            <div className="modal-cart">
+            <div className={ !this.props.isCheckOutModal ? "modal-cart hidden-modal" : "modal-cart"}>
                 <div className="modal-cart--content">
-                    <FormInput nameLabel="Full Name" nameInput="Input full name" onChangeValue={this.onChangeFullname}/>
-                    <FormInput nameLabel="Phone Number" nameInput="Input phone number" onChangeValue={this.onChangePhoneNumber}/>
-                    <FormInput nameLabel="Email" nameInput="Input email" onChangeValue={this.onChangeEmail}/>
-                    <FormInput nameLabel="Address" nameInput="Input address" onChangeValue={this.onChangeAddress}/>
+                    <span className="close" onClick={this.props.closeCheckOutModal}>&times;</span> <br/>
+                    <div className="modal-cart--content-form">
+                        <div className="modal-cart--content-form--left">
+                            <FormInput nameLabel="Full Name" nameInput="Input full name" onChangeValue={this.onChangeFullname}/>
+                            <FormInput nameLabel="Phone Number" nameInput="Input phone number" onChangeValue={this.onChangePhoneNumber}/>
+                            <FormInput nameLabel="Email" nameInput="Input email" onChangeValue={this.onChangeEmail}/>
+                            <FormInput nameLabel="Address" nameInput="Input address" onChangeValue={this.onChangeAddress}/>
+                        </div>
+                        <div className="modal-cart--content-form--right">
+                            {
+                                this.props.cart.map((item, index) => {
+                                    return <p key={index}>{item.title} x {item.quantity}</p>
+                                })
+                            }
+                            <p>Total Price: {this.props.totalPrice}</p>
+                        </div>
+                    </div>
+                    <button className="btn btn-green" onClick={this.callbackFn}>Check out</button>
                 </div>
             </div>
         );
