@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../css/signin.scss';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
+var md5 = require('md5');
 
 class Signin extends React.Component {
 
@@ -13,7 +14,8 @@ class Signin extends React.Component {
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            errLogin: false
         }
     }
 
@@ -28,12 +30,15 @@ class Signin extends React.Component {
     signIn() {
         axios.post('/api/signin', {
             email: this.state.email,
-            password: this.state.password
+            password: md5(this.state.password)
           })
           .then((res) => {
             if (res.data) {
                 const dispatch = this.props.dispatch;
                 dispatch({ type: 'LOG_IN' , session: res.data});
+            }
+            else {
+                this.setState({ errLogin: true })
             }
           })
           .catch((err) => {
@@ -52,6 +57,9 @@ class Signin extends React.Component {
                 <label htmlFor="inputPassword" className="sr-only">Mật khẩu</label>
                 <input type="password" onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Mật khẩu" required />
                 <button className="btn btn-lg btn-primary btn-block" onClick={this.signIn} type="button">Đăng nhập</button>
+                { this.state.errLogin &&
+                    <label>Username or password incorrectly</label>
+                }
             </form>
         );
     }

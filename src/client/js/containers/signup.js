@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+var md5 = require('md5');
 
 class Signup extends React.Component{
 
@@ -29,11 +30,10 @@ class Signup extends React.Component{
   }
 
   signUp() {
-      console.log(this.state.name, this.state.email, this.state.password);
       axios.post('/api/signup', {
           name: this.state.name,
           email: this.state.email,
-          password: this.state.password
+          password: md5(this.state.password)
         })
         .then(function (response) {
           console.log(response.data);
