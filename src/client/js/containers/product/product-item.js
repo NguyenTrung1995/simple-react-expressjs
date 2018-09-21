@@ -12,7 +12,7 @@ class ProductItem extends React.Component {
         return (
             <div className="product-item">
                 <h4>{title}</h4>
-                <img src={ require('../../../img/01.jpg') } />
+                <img src={'../../../img/01.jpg'} />
                 <div className="product-item-container">
                     <p>Price: {price}</p>
                     <button disabled={isEnabled} onClick={() => this.props.addToCart(this.props.product)}>
@@ -20,6 +20,9 @@ class ProductItem extends React.Component {
                             isEnabled ? 'Added to cart' : 'Add to cart' 
                         }
                     </button>
+                    { isEnabled &&
+                        <button onClick={() => this.props.removeAllFromCart(this.props.product)}>X</button>
+                    }
                 </div>
             </div>
         );

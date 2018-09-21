@@ -5,6 +5,7 @@ const app = express();
 
 const user = require('./user.js');
 const order = require('./order.js');
+const product = require('./product.js');
 
 app.use(express.static("dist"));
 app.use(bodyParser.json());
@@ -65,6 +66,12 @@ app.post("/api/order", function(req, res) {
 
   order.order(name, phone, email, address, package);
   res.send('done');
+})
+
+app.get("/api/fetchdata", (req, res) => {
+    product.fetchData(data => {
+      res.send(data);
+    })
 })
 
 app.listen(5000, () => console.log("Listening on port 5000!"));

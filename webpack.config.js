@@ -31,17 +31,13 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg|jpg)$/,
-        loader: 'url-loader?limit=100000'
+        test    : /\.(png|jpg|jpeg)$/,
+        include : path.join(__dirname, 'img'),
+        loader  : 'url-loader?limit=3000000&name=images/[name].[ext]'
       },
       {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {}
-          }
-        ]
+        test    : /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loader  : 'file-loader'
       }
     ]
   },

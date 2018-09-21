@@ -15,6 +15,7 @@ class ProductListItem extends React.Component {
                     <ProductItem key={product.id} 
                                  product={product} 
                                  addToCart={this.props.addToCart}
+                                 removeAllFromCart={this.props.removeAllFromCart}
                                  cart={this.props.cart}
                     /> )
                 }
@@ -31,6 +32,9 @@ function mapDispatchToProps(dispatch) {
     return {
         addToCart: (item) => {
             dispatch({ type: 'ADD_ITEM', payload: item })
+        },
+        removeAllFromCart: (item) => {
+            dispatch({ type: 'REMOVE_ALL_ITEM', payload: item })
         }
     }
 }
