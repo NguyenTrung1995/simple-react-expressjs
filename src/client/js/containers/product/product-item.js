@@ -11,7 +11,8 @@ class ProductItem extends React.Component {
         const isEnabled = this.props.cart.filter(item => item.id === this.props.product.id).length === 0 ? false : true;
         return (
             <div className="product-item">
-                <h3>{title}</h3>
+                <h4>{title}</h4>
+                <img src={ require('../../../img/01.jpg') } />
                 <div className="product-item-container">
                     <p>Price: {price}</p>
                     <button disabled={isEnabled} onClick={() => this.props.addToCart(this.props.product)}>
