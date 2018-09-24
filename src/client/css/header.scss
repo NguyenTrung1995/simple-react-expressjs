@@ -32,6 +32,25 @@
             height: 25px;
             background: url('../img/icon-cart-white.png') center no-repeat;
             background-size: contain;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .page--overlay {
+            display: none;
+            background: rgba(0,0,0,.3);
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 99;
+        }
+        
+        .enableOverlay {
+            display: block;
         }
     }
 }

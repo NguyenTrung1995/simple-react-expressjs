@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import CartItem from './cart-item';
 import ModalCart from '../../components/ModalCart';
+import '../../../css/organisms/cart.scss';
 
 function sort(items) {
     return items.sort((a, b) => a.id < b.id)
@@ -45,9 +46,17 @@ class Cart extends React.Component {
     render() {
         const totalPrice = this.props.cart.reduce((accumulator, currentItem) => {
             return accumulator + currentItem.quantity * currentItem.price;
-        }, 0)
+        }, 0);
+        const classNameCart = "mini-cart";
         return (
-            <div>
+            <div className={this.props.isToggleCart ? classNameCart + " isToggleCart" : classNameCart}>
+                <div className="mini-cart__top">
+                    <span className="cart-close" onClick={this.props.closeCart}>Close</span>
+                    <p className="mini-cart__top--title">YOUR CART</p>
+                    <span className="mini-cart-icon" onClick={this.props.closeCart}>
+                        <span className="mini-cart-icon__quantity "></span>
+                    </span>
+                </div>
                 { 
                     sort(this.props.cart).map((item, index) => 
                         <CartItem key={index}
