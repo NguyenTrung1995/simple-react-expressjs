@@ -31,13 +31,8 @@ module.exports = {
         ]
       },
       {
-        test    : /\.(png|jpg|jpeg)$/,
-        include : path.join(__dirname, 'img'),
-        loader  : 'url-loader?limit=3000000&name=images/[name].[ext]'
-      },
-      {
-        test    : /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader  : 'file-loader'
+        test: /\.(png|woff|woff2|eot|ttf|svg|jpe?g)$/i,
+        loader: 'url-loader?limit=10000'
       }
     ]
   },

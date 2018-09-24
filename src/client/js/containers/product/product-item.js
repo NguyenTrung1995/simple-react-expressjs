@@ -1,18 +1,28 @@
 import * as React from 'react';
 import '../../../css/product/product.scss';
 
+function importAll(r) {
+    let images = {};
+    r.keys().map((item, index) => {
+        images[item.replace('./', '')] = r(item); 
+    });
+    return images;
+}
+
+const images = importAll(require.context('../../../img', false, /\.(png|jpe?g|svg)$/));
+
 class ProductItem extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        const { title, price } = this.props.product;
+        const { title, price, img } = this.props.product;
         const isEnabled = this.props.cart.filter(item => item.id === this.props.product.id).length === 0 ? false : true;
         return (
             <div className="product-item">
                 <h4>{title}</h4>
-                <img src={'../../../img/01.jpg'} />
+                <img src={images[img]} />
                 <div className="product-item-container">
                     <p>Price: {price}</p>
                     <button disabled={isEnabled} onClick={() => this.props.addToCart(this.props.product)}>

@@ -12,14 +12,19 @@ class Home extends React.Component {
         }
     }
 
+    componentDidMount() {
+        axios
+            .get('/api/fetchdata')
+            .then((res) => {
+                this.setState({ productData: res.data })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
     render() {
-        axios.get('/api/fetchdata')
-             .then((res) => {
-                 this.setState({ productData: res.data })
-             })
-             .catch((err) => {
-                 console.log(err)
-             })
+       
         return(
             <div>
                 <h1>Home Page</h1>
