@@ -54,31 +54,35 @@ class Cart extends React.Component {
                     <span className="cart-close" onClick={this.props.closeCart}>Close</span>
                     <p className="mini-cart__top--title">YOUR CART</p>
                     <span className="mini-cart-icon" onClick={this.props.closeCart}>
-                        <span className="mini-cart-icon__quantity "></span>
+                        <span className="mini-cart-icon__quantity"></span>
                     </span>
                 </div>
-                { 
-                    sort(this.props.cart).map((item, index) => 
-                        <CartItem key={index}
-                                  item={item}
-                                  addToCart={this.props.addToCart}
-                                  removeFromCart={this.props.removeFromCart}
-                                  removeAllFromCart={this.props.removeAllFromCart}
-                        />
-                    )
-                }
-                <div>Total Price: {totalPrice}</div>
-                <div>
-                    <button className="btn btn-green" onClick={this.openCheckOutModal}>Check out</button>
-                    { this.state.isCheckOutModal &&
-                        <ModalCart
-                            cart={this.props.cart}
-                            totalPrice = {totalPrice}
-                            orderFunction={this.orderFunction}
-                            closeCheckOutModal = {this.closeCheckOutModal}
-                            isCheckOutModal = {this.state.isCheckOutModal}
-                        />
+                <div className="mini-cart__body">
+                    { 
+                        sort(this.props.cart).map((item, index) => 
+                            <CartItem key={index}
+                                    item={item}
+                                    addToCart={this.props.addToCart}
+                                    removeFromCart={this.props.removeFromCart}
+                                    removeAllFromCart={this.props.removeAllFromCart}
+                            />
+                        )
                     }
+                </div>
+                <div className="mini-cart__footer">
+                    <div>Total Price: {totalPrice}</div>
+                    <div>
+                        <button className="btn btn-green" onClick={this.openCheckOutModal}>Check out</button>
+                        { this.state.isCheckOutModal &&
+                            <ModalCart
+                                cart={this.props.cart}
+                                totalPrice = {totalPrice}
+                                orderFunction={this.orderFunction}
+                                closeCheckOutModal = {this.closeCheckOutModal}
+                                isCheckOutModal = {this.state.isCheckOutModal}
+                            />
+                        }
+                    </div>
                 </div>
             </div>
         );
