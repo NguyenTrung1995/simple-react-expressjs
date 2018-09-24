@@ -9,7 +9,8 @@ class Root extends React.Component {
 
     render() {
         return (
-            this.props.session ? <Redirect to="/home" /> : <Redirect to="/signin" />
+            // this.props.session ? <Redirect to="/home" /> : <Redirect to="/signin" />
+            <Redirect to="/home" />
         );
     }
 }

@@ -33,6 +33,11 @@ module.exports = {
       {
         test: /\.(png|woff|woff2|eot|ttf|svg|jpe?g)$/i,
         loader: 'url-loader?limit=10000'
+      },
+      {
+        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+        include: [path.join(__dirname, "src/assets")],
+        loader: "file-loader?name=assets/[name].[ext]"
       }
     ]
   },

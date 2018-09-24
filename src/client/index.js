@@ -15,6 +15,7 @@ import StyleGuide from "./js/containers/styleguide.tsx";
 import reducers from './js/reducer';
 import Account from "./js/containers/account.js";
 import Cart from "./js/containers/cart/cart.js";
+import Header from "./js/components/Header.tsx";
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
@@ -22,7 +23,8 @@ ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>
         <BrowserRouter>
             <div>
-                <Navigation/>
+                {/* <Navigation/> */}
+                <Header />
                 <Switch>
                     <Route exact={true} path='/' component={Root}/>
                     <Route path='/home' component={Home}/>

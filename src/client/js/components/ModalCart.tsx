@@ -4,7 +4,7 @@ import FormInput from './FormInput';
 import '../../css/organisms/modal-cart.scss';
 import Button from './Button';
 
-class ModalCart extends React.Component {
+class ModalCart extends React.Component<any, any> {
     
     constructor(props) {
         super(props);
