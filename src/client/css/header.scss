@@ -1,5 +1,8 @@
 .header__container {
     background: rgba(0, 14, 34, 0.9);
+    position: sticky;
+    top: 0;
+    width: 100%;
 
     .header__top {
         display: flex;

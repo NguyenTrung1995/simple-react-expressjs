@@ -31,17 +31,10 @@
 }
 
 .menu-close {
-    margin-left: 25px;
-    margin-top: 28px;
-    margin-bottom: 30px;
-
-    &::before {
-        content: '';
-        width: 25px;
-        height: 25px;
-        background: url('../img/icon-close.png') center no-repeat;
-        background-size: contain;
-    }
+    width: 25px;
+    height: 25px;
+    background: url('../img/icon-close-white.png') center no-repeat;
+    background-size: contain;
 
     &:hover {
         cursor: pointer;

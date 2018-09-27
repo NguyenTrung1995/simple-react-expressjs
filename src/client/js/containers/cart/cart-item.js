@@ -1,4 +1,15 @@
 import * as React from 'react';
+import '../../../css/organisms/cart-item.scss';
+
+function importAll(r) {
+    let images = {};
+    r.keys().map((item, index) => {
+        images[item.replace('./', '')] = r(item); 
+    });
+    return images;
+}
+
+const images = importAll(require.context('../../../img', false, /\.(png|jpe?g|svg)$/));
 
 class CartItem extends React.Component {
 
@@ -13,13 +24,22 @@ class CartItem extends React.Component {
 
     render() {
         return (
-            <div>
-                <span>{this.props.item.title}</span>
-                <span>{this.props.item.inventory}</span>
-                <button onClick={this.increaseItem}>+</button>
-                <span>{this.props.item.quantity}</span>
-                <button onClick={() => this.props.removeFromCart(this.props.item)}>-</button>
-                <button onClick={() => this.props.removeAllFromCart(this.props.item)}>Remove All</button>
+            <div className="cart-item">
+                <div className="cart-item--img">
+                    <img src={images[this.props.item.img]} />
+                </div>
+                <div className="cart-item--detail">
+                    <div className="cart-item--detail__title">
+                        <a href="#" className="cart-item--detail__title_a">{this.props.item.title}</a>
+                        <button onClick={() => this.props.removeAllFromCart(this.props.item)}>X</button>
+                    </div>
+                    <span>{this.props.item.quantity} x ${this.props.item.price}</span>
+                    <div className="cart-item--detail__btn">
+                        <button onClick={this.increaseItem}>+</button>
+                        <span>{this.props.item.quantity}</span>
+                        <button onClick={() => this.props.removeFromCart(this.props.item)}>-</button>
+                    </div>
+                </div>
             </div>
         );
     }

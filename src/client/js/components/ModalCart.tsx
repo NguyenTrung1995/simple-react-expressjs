@@ -45,7 +45,7 @@ class ModalCart extends React.Component<any, any> {
                     <div className="modal-cart--content-form">
                         <div className="modal-cart--content-form--left">
                             <FormInput nameLabel="Full Name" nameInput="Input full name" onChangeValue={this.onChangeFullname}/>
-                            <FormInput nameLabel="Phone Number" nameInput="Input phone number" onChangeValue={this.onChangePhoneNumber}/>
+                            <FormInput nameLabel="Phone" nameInput="Input phone number" onChangeValue={this.onChangePhoneNumber}/>
                             <FormInput nameLabel="Email" nameInput="Input email" onChangeValue={this.onChangeEmail}/>
                             <FormInput nameLabel="Address" nameInput="Input address" onChangeValue={this.onChangeAddress}/>
                         </div>
@@ -55,7 +55,7 @@ class ModalCart extends React.Component<any, any> {
                                     return <p key={index}>{item.title} x {item.quantity}</p>
                                 })
                             }
-                            <p>Total Price: {this.props.totalPrice}</p>
+                            <p className="modal-cart--total__price">Total Price: {this.props.totalPrice}</p>
                         </div>
                     </div>
                     <button className="btn btn-green" onClick={this.callbackFn}>Check out</button>

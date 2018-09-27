@@ -33,8 +33,9 @@
         }
 
         &-form {
-            padding: 20px 100px;
+            padding: 20px 0;
             display: flex;
+            font-size: 12px;
 
             &--left {
                 width: 50%;
@@ -45,11 +46,21 @@
             }
 
             &--right {
-                margin: 10px;
-                margin-left: 50px;
                 text-align: left;
+                width: 40%;
+                position: relative;
+
+                p {
+                    margin: 10px;
+                }
             }
         }
+    }
+
+    &--total__price {
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 0 !important;
     }
 
     &.hidden-modal {

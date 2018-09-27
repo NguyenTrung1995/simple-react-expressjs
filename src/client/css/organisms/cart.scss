@@ -12,6 +12,11 @@
     transition: transform 250ms ease-in-out;
 
     .cart-close {
+        margin-left: 25px;
+        width: 25px;
+        height: 25px;
+        background: url('../../img/icon-close-black.png') center no-repeat;
+            background-size: contain;
         &:hover {
             cursor: pointer;
         }
@@ -48,6 +53,8 @@
     &__footer {
         position: absolute;
         bottom: 0px;
+        width: 100%;
+        text-align: center;
     }
 }
 

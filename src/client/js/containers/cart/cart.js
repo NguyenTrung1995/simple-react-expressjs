@@ -51,7 +51,7 @@ class Cart extends React.Component {
         return (
             <div className={this.props.isToggleCart ? classNameCart + " isToggleCart" : classNameCart}>
                 <div className="mini-cart__top">
-                    <span className="cart-close" onClick={this.props.closeCart}>Close</span>
+                    <span className="cart-close" onClick={this.props.closeCart}></span>
                     <p className="mini-cart__top--title">YOUR CART</p>
                     <span className="mini-cart-icon" onClick={this.props.closeCart}>
                         <span className="mini-cart-icon__quantity"></span>
@@ -70,7 +70,7 @@ class Cart extends React.Component {
                     }
                 </div>
                 <div className="mini-cart__footer">
-                    <div>Total Price: {totalPrice}</div>
+                    <div>Total Price: ${totalPrice}</div>
                     <div>
                         <button className="btn btn-green" onClick={this.openCheckOutModal}>Check out</button>
                         { this.state.isCheckOutModal &&
