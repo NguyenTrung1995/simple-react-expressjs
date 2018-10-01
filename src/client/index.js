@@ -16,6 +16,7 @@ import reducers from './js/reducer';
 import Account from "./js/containers/account.js";
 import Cart from "./js/containers/cart/cart.js";
 import Header from "./js/components/Header.tsx";
+import DetailProduct from "./js/containers/detail_product.tsx";
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
@@ -33,6 +34,7 @@ ReactDOM.render(
                     <Route path='/signup' component={Signup}/>
                     <Route path='/cart' component={Cart}/>
                     <Route path='/styleguide' component={StyleGuide}/>
+                    <Route path="/product/:productid" component={DetailProduct}/>
                     <Route component={Error}/>
                 </Switch>
             </div>

@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { Redirect } from 'react-router';
 import '../../../css/product/product.scss';
+
 
 function importAll(r) {
     let images = {};
@@ -14,13 +16,21 @@ const images = importAll(require.context('../../../img', false, /\.(png|jpe?g|sv
 class ProductItem extends React.Component {
     constructor(props) {
         super(props);
+        this.viewDetailProduct = this.viewDetailProduct.bind(this);
+    }
+
+    viewDetailProduct () {
+        return (
+            // <Redirect to={"/product/" + this.props.product.img} />
+            <Redirect to="/haha"/>
+        );
     }
 
     render() {
         const { title, price, img } = this.props.product;
         const isEnabled = this.props.cart.filter(item => item.id === this.props.product.id).length === 0 ? false : true;
         return (
-            <div className="product-item">
+            <a className="product-item" href={"/product/" + this.props.product.img}>
                 <h4>{title}</h4>
                 <img src={images[img]} />
                 <div className="product-item-container">
@@ -34,7 +44,7 @@ class ProductItem extends React.Component {
                         <button onClick={() => this.props.removeAllFromCart(this.props.product)}>X</button>
                     }
                 </div>
-            </div>
+            </a>
         );
     }
 }

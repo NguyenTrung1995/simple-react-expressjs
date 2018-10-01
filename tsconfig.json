@@ -8,6 +8,10 @@
       "allowJs": true,
       "allowSyntheticDefaultImports": true,
       "esModuleInterop": true,
-      "sourceMap": true
+      "sourceMap": true,
+      "types": [
+        "node",
+        "webpack-env"
+      ]
     }
   }
