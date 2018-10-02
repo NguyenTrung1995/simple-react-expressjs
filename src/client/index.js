@@ -34,7 +34,7 @@ ReactDOM.render(
                     <Route path='/signup' component={Signup}/>
                     <Route path='/cart' component={Cart}/>
                     <Route path='/styleguide' component={StyleGuide}/>
-                    <Route path="/product/:product_name" component={DetailProduct}/>
+                    <Route path="/:product_name" component={DetailProduct}/>
                     <Route component={Error}/>
                 </Switch>
             </div>

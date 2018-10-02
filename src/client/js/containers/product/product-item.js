@@ -24,7 +24,7 @@ class ProductItem extends React.Component {
         return (
             <div className="product-item">
                 <h4>{title}</h4>
-                <Link to={"/product/" + alt}>
+                <Link to={"/" + alt}>
                     <img src={images[img]} />
                 </Link>
                 <div className="product-item-container">
