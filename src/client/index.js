@@ -16,7 +16,7 @@ import reducers from './js/reducer';
 import Account from "./js/containers/account.js";
 import Cart from "./js/containers/cart/cart.js";
 import Header from "./js/components/Header.tsx";
-import DetailProduct from "./js/containers/detail_product.tsx";
+import DetailProduct from "./js/containers/product_detail.tsx";
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 

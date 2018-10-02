@@ -1,5 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
+import '../../css/product/product-detail.scss';
 
 function importAll(r) {
     let images = {};
@@ -32,7 +33,7 @@ class DetailProduct extends React.Component<any, any> {
 
     render() {
         return (
-            <div> 
+            <div className="product-detail"> 
                 <h2>{this.state.product.title}</h2>
                 <img src={images[this.state.product.img]} alt={this.state.product.alt}/>
             </div>
