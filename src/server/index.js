@@ -69,9 +69,16 @@ app.post("/api/order", function(req, res) {
 })
 
 app.get("/api/fetchdata", (req, res) => {
-    product.fetchData(data => {
+    product.fetchProducts(data => {
       res.send(data);
     })
+})
+
+app.get("/api/fetchdata/:product_name", (req, res) => {
+  const alt = req.params.product_name;
+  product.fetchProduct(alt, product => {
+    res.send(product);
+  })
 })
 
 app.listen(5000, () => console.log("Listening on port 5000!"));

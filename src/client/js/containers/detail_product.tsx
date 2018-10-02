@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios';
 
 function importAll(r) {
     let images = {};
@@ -11,11 +12,30 @@ function importAll(r) {
 const images = importAll(require.context('../../img', false, /\.(png|jpe?g|svg)$/));
 
 class DetailProduct extends React.Component<any, any> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            product: {}
+        }
+    }
+
+    componentDidMount() {
+        axios
+            .get('/api/fetchdata/' + this.props.match.params.product_name)
+            .then((res) => {
+                console.log(res.data);
+                this.setState({ product: res.data })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
     render() {
-        console.log('haha');
         return (
             <div>
-                <img src={images[this.props.item.img]}/>
+                <h2>{this.state.product.title}</h2>
+                <img src={images[this.state.product.img]}/>
             </div>
         );
     }

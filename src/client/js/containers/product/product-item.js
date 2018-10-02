@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 import '../../../css/product/product.scss';
 
 
@@ -16,23 +16,17 @@ const images = importAll(require.context('../../../img', false, /\.(png|jpe?g|sv
 class ProductItem extends React.Component {
     constructor(props) {
         super(props);
-        this.viewDetailProduct = this.viewDetailProduct.bind(this);
-    }
-
-    viewDetailProduct () {
-        return (
-            // <Redirect to={"/product/" + this.props.product.img} />
-            <Redirect to="/haha"/>
-        );
     }
 
     render() {
-        const { title, price, img } = this.props.product;
+        const { title, price, img, alt } = this.props.product;
         const isEnabled = this.props.cart.filter(item => item.id === this.props.product.id).length === 0 ? false : true;
         return (
-            <a className="product-item" href={"/product/" + this.props.product.img}>
+            <div className="product-item">
                 <h4>{title}</h4>
-                <img src={images[img]} />
+                <Link to={"/product/" + alt}>
+                    <img src={images[img]} />
+                </Link>
                 <div className="product-item-container">
                     <p>Price: {price}</p>
                     <button disabled={isEnabled} onClick={() => this.props.addToCart(this.props.product)}>
@@ -44,7 +38,7 @@ class ProductItem extends React.Component {
                         <button onClick={() => this.props.removeAllFromCart(this.props.product)}>X</button>
                     }
                 </div>
-            </a>
+            </div>
         );
     }
 }

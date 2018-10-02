@@ -1,7 +1,7 @@
 [
-    {"id": 1, "title": "Classic Black", "price": 175, "inventory": 2, "img": "01.jpg"},
-    {"id": 2, "title": "Classic Cornwall", "price": 200, "inventory": 10, "img": "02.jpg"},
-    {"id": 3, "title": "Classic Bayswater", "price": 175, "inventory": 5, "img": "03.jpg"},
-    {"id": 4, "title": "Classic Sheffield", "price": 175, "inventory": 5, "img": "04.jpg"},
-    {"id": 5, "title": "Classic Bristol", "price": 200, "inventory": 5, "img": "05.jpg"}
+    {"id": 1, "title": "Classic Black", "alt": "classic-black", "price": 175, "inventory": 2, "img": "01.jpg"},
+    {"id": 2, "title": "Classic Cornwall", "alt": "classic-cornwall", "price": 200, "inventory": 10, "img": "02.jpg"},
+    {"id": 3, "title": "Classic Bayswater", "alt": "classic-bayswater", "price": 175, "inventory": 5, "img": "03.jpg"},
+    {"id": 4, "title": "Classic Sheffield", "alt": "classic-sheffield", "price": 175, "inventory": 5, "img": "04.jpg"},
+    {"id": 5, "title": "Classic Bristol", "alt": "classic-bristol", "price": 200, "inventory": 5, "img": "05.jpg"}
 ]
