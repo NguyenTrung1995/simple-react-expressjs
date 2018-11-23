@@ -1,16 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
 import '../../css/product/product-detail.scss';
-
-function importAll(r) {
-    let images = {};
-    r.keys().map((item, index) => {
-        images[item.replace('./', '')] = r(item); 
-    });
-    return images;
-}
-
-const images = importAll(require.context('../../img', false, /\.(png|jpe?g|svg)$/));
+import { images } from '../common';
 
 class DetailProduct extends React.Component<any, any> {
     constructor(props) {

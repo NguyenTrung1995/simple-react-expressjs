@@ -24,7 +24,6 @@ class Home extends React.Component {
     }
 
     render() {
-       
         return(
             <div>
                 <ProductListItem products={this.state.productData}/>

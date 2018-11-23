@@ -11,8 +11,8 @@ class ProductListItem extends React.Component {
         return (
             <div className="product-list-item">
                 {
-                    this.props.products.map( product =>
-                    <ProductItem key={product.id} 
+                    this.props.products.map((product, index) =>
+                    <ProductItem key={index} 
                                  product={product} 
                                  addToCart={this.props.addToCart}
                                  removeAllFromCart={this.props.removeAllFromCart}
