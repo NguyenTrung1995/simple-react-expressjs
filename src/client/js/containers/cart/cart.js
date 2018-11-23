@@ -4,10 +4,8 @@ import axios from 'axios';
 import CartItem from './cart-item';
 import ModalCart from '../../components/ModalCart';
 import '../../../css/organisms/cart.scss';
-
-function sort(items) {
-    return items.sort((a, b) => a.id < b.id)
-}
+import { bindActionCreators } from 'redux';
+import * as actions from '../../actions';
 
 class Cart extends React.Component {
     constructor(props) {
@@ -48,6 +46,7 @@ class Cart extends React.Component {
             return accumulator + currentItem.quantity * currentItem.price;
         }, 0);
         const classNameCart = "mini-cart";
+        const cartItems = this.props.cart.sort((a, b) => a.id - b.id);
         return (
             <div className={this.props.isToggleCart ? classNameCart + " isToggleCart" : classNameCart}>
                 <div className="mini-cart__top">
@@ -59,12 +58,12 @@ class Cart extends React.Component {
                 </div>
                 <div className="mini-cart__body">
                     { 
-                        sort(this.props.cart).map((item, index) => 
+                        cartItems.map((item, index) => 
                             <CartItem key={index}
                                     item={item}
-                                    addToCart={this.props.addToCart}
-                                    removeFromCart={this.props.removeFromCart}
-                                    removeAllFromCart={this.props.removeAllFromCart}
+                                    addToCart={this.props.actions.addToCart}
+                                    removeFromCart={this.props.actions.removeFromCart}
+                                    removeAllFromCart={this.props.actions.removeAllFromCart}
                             />
                         )
                     }
@@ -95,16 +94,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addToCart: (item) => {
-            dispatch({ type: 'ADD_ITEM', payload: item })
-        },
-        removeFromCart: (item) => {
-            dispatch({ type: 'REMOVE_ITEM', payload: item })
-        },
-        removeAllFromCart: (item) => {
-            dispatch({ type: 'REMOVE_ALL_ITEM', payload: item })
-        },
-    }
+        actions: bindActionCreators(actions, dispatch)
+      };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -10,7 +10,7 @@ class ProductItem extends React.Component {
 
     render() {
         const { title, price, img, alt } = this.props.product;
-        const isEnabled = this.props.cart.filter(item => item.id === this.props.product.id).length === 0 ? false : true;
+        const isEnabled = this.props.cart.some(item => item.id === this.props.product.id);
         return (
             <div className="product-item">
                 <h4>{title}</h4>
