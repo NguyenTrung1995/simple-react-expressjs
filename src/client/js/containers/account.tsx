@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-class Account extends React.Component {
+class Account extends React.Component<any, any> {
 
     constructor(props) {
         super(props);

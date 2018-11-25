@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../../css/product/product.scss';
 import {images} from '../../common';
 
-class ProductItem extends React.Component {
+class ProductItem extends React.Component<any, any> {
     constructor(props) {
         super(props);
     }

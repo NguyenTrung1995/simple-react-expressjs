@@ -5,7 +5,7 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 var md5 = require('md5');
 
-class Signin extends React.Component {
+class Signin extends React.Component<any, any> {
 
     constructor(props) {
         super(props);

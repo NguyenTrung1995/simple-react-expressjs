@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-class Navigation extends React.Component {
+class Navigation extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.signOut = this.signOut.bind(this);

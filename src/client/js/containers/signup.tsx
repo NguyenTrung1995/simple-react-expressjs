@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 var md5 = require('md5');
 
-class Signup extends React.Component{
+class Signup extends React.Component<any, any> {
 
   constructor(props) {
     super(props);

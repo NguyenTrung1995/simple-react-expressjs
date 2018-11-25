@@ -1,9 +1,8 @@
 import * as React from 'react';
-import productData from '../api/products.json';
 import ProductListItem from './product/product-list-item';
 import axios from 'axios';
 
-class Home extends React.Component {
+class Home extends React.Component<any, any> {
 
     constructor(props) {
         super(props);

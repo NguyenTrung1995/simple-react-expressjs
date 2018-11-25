@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
-class Root extends React.Component {
+class Root extends React.Component<any, any> {
     constructor(props) {
         super(props);
     }

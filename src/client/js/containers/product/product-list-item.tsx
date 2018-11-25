@@ -2,7 +2,7 @@ import * as React from 'react';
 import ProductItem from './product-item';
 import { connect } from 'react-redux';
 
-class ProductListItem extends React.Component {
+class ProductListItem extends React.Component<any, any> {
     constructor(props) {
         super(props);
     }

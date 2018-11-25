@@ -7,7 +7,7 @@ import '../../../css/organisms/cart.scss';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions';
 
-class Cart extends React.Component {
+class Cart extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
