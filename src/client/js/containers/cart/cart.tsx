@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import CartItem from './cart-item';
 import ModalCart from '../../components/ModalCart';
-import '../../../css/organisms/cart.scss';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions';
 

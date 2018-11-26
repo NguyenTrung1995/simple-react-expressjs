@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import '../../css/header.scss';
+// import '../../css/header.scss';
 import Menu from './Menu';
 import Cart from '../containers/cart/cart';
 

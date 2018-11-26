@@ -7,7 +7,7 @@ const outputDirectory = 'dist';
 const path = require('path');
 
 module.exports = {
-  entry: './src/client/index.js',
+  entry: './src/client/',
   output: {
     path: path.join(__dirname, outputDirectory),
     filename: 'bundle.js'

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import '../../../css/organisms/cart-item.scss';
+// import '../../../css/organisms/cart-item.scss';
 import { images } from '../../common';
 
 class CartItem extends React.Component<any, any> {

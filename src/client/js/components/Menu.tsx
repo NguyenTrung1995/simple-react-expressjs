@@ -1,5 +1,5 @@
 import * as React from 'react';
-import '../../css/menu.scss';
+// import '../../css/menu.scss';
 import { Link } from 'react-router-dom';
 
 class Menu extends React.Component<any, any> {

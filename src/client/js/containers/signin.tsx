@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import '../../css/signin.scss';
+// import '../../css/signin.scss';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 var md5 = require('md5');
