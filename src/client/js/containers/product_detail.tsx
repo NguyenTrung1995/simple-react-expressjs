@@ -15,6 +15,7 @@ class DetailProduct extends React.Component<any, any> {
         axios
             .get('/api/fetchdata/' + this.props.match.params.product_name)
             .then((res) => {
+                console.log(res.data);
                 this.setState({ product: res.data })
             })
             .catch((err) => {
@@ -25,7 +26,7 @@ class DetailProduct extends React.Component<any, any> {
     render() {
         return (
             <div className="product-detail"> 
-                <h2>{this.state.product.title}</h2>
+                <h2>{this.state.product.name}</h2>
                 <img src={images[this.state.product.img]} alt={this.state.product.alt}/>
             </div>
         );
