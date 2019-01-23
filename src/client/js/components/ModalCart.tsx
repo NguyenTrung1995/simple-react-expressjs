@@ -52,7 +52,7 @@ class ModalCart extends React.Component<any, any> {
                         <div className="modal-cart--content-form--right">
                             {
                                 this.props.cart.map((item, index) => {
-                                    return <p key={index}>{item.title} x {item.quantity}</p>
+                                    return <p key={index}>{item.name} x {item.quantity}</p>
                                 })
                             }
                             <p className="modal-cart--total__price">Total Price: {this.props.totalPrice}</p>

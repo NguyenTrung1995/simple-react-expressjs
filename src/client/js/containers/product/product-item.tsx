@@ -8,11 +8,11 @@ class ProductItem extends React.Component<any, any> {
     }
 
     render() {
-        const { title, price, img, alt } = this.props.product;
+        const { name, price, img, alt } = this.props.product;
         const isEnabled = this.props.cart.some(item => item.id === this.props.product.id);
         return (
             <div className="product-item">
-                <h4>{title}</h4>
+                <h4>{name}</h4>
                 <Link to={"/" + alt}>
                     <img src={images[img]} />
                 </Link>

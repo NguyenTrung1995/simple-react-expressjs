@@ -21,7 +21,7 @@ class CartItem extends React.Component<any, any> {
                 </div>
                 <div className="cart-item--detail">
                     <div className="cart-item--detail__title">
-                        <a href="#" className="cart-item--detail__title_a">{this.props.item.title}</a>
+                        <a href="#" className="cart-item--detail__title_a">{this.props.item.name}</a>
                         <button onClick={() => this.props.removeAllFromCart(this.props.item)}>X</button>
                     </div>
                     <span>{this.props.item.quantity} x ${this.props.item.price}</span>

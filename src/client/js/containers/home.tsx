@@ -15,7 +15,7 @@ class Home extends React.Component<any, any> {
         axios
             .get('/api/fetchdata')
             .then((res) => {
-                this.setState({ productData: res.data })
+                this.setState({ productData: res.data.products})
             })
             .catch((err) => {
                 console.log(err)

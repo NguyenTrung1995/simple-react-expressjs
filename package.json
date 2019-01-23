@@ -12,7 +12,9 @@
   },
   "author": "Trung",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "node-fetch": "^2.3.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",

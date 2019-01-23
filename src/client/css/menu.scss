@@ -35,6 +35,10 @@
     height: 25px;
     background: url('../img/icon-close-white.png') center no-repeat;
     background-size: contain;
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
 
     &:hover {
         cursor: pointer;

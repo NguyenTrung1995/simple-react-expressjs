@@ -1,6 +1,8 @@
 const express = require("express");
 var bodyParser = require("body-parser");
 var session = require('express-session');
+const fetch = require('node-fetch');
+
 const app = express();
 
 const user = require('./user.js');
@@ -69,9 +71,9 @@ app.post("/api/order", function(req, res) {
 })
 
 app.get("/api/fetchdata", (req, res) => {
-    product.fetchProducts(data => {
-      res.send(data);
-    })
+  fetch("https://hbpgpqsys9.execute-api.us-east-2.amazonaws.com/dev/product/products")
+    .then(response => response.json())
+    .then(data => res.send(data))
 })
 
 app.get("/api/fetchdata/:product_name", (req, res) => {

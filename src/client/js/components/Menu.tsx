@@ -13,7 +13,7 @@ class Menu extends React.Component<any, any> {
         return (
             <div className={ this.props.isToggled ? className + " is-toggled" : className }>
                 <div className="menu__top">
-                    <span className="menu-close" onClick={this.props.closeMenu}>Close</span>
+                    <span className="menu-close" onClick={this.props.closeMenu} />
                 </div>
                 <ul className="menu__list">
                     {
