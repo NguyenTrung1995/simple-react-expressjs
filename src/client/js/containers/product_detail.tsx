@@ -15,7 +15,6 @@ class DetailProduct extends React.Component<any, any> {
         axios
             .get('/api/fetchdata/' + this.props.match.params.product_name)
             .then((res) => {
-                console.log(res.data);
                 this.setState({ product: res.data })
             })
             .catch((err) => {

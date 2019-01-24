@@ -78,13 +78,9 @@ app.get("/api/fetchdata", (req, res) => {
 
 app.get("/api/fetchdata/:product_name", (req, res) => {
   const alt = req.params.product_name;
-  console.log(alt);
   fetch(`https://hbpgpqsys9.execute-api.us-east-2.amazonaws.com/dev/product/${alt}`)
     .then(response => response.json())
-    .then(data => res.send(data))
-  // product.fetchProduct(alt, product => {
-  //   res.send(product);
-  // })
+    .then(data => res.send(data.product.Items[0]))
 })
 
 app.listen(5000, () => console.log("Listening on port 5000!"));
