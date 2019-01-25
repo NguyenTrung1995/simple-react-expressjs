@@ -6,8 +6,6 @@ const fetch = require('node-fetch');
 const app = express();
 
 const user = require('./user.js');
-const order = require('./order.js');
-const product = require('./product.js');
 
 app.use(express.static("dist"));
 app.use(bodyParser.json());
@@ -59,15 +57,22 @@ app.post("/api/signup", function(req, res) {
 });
 
 app.post("/api/order", function(req, res) {
-  console.log(req.body);
-  var name = req.body.name;
-  var phone = req.body.phone;
-  var email = req.body.email;
-  var address = req.body.address;
-  var package = req.body.package;
 
-  order.order(name, phone, email, address, package);
-  res.send('done');
+  const orderItem = {
+    name: req.body.name,
+    phone: req.body.phone,
+    email: req.body.email,
+    address: req.body.address,
+    package: req.body.package
+  }
+  
+  fetch('https://hbpgpqsys9.execute-api.us-east-2.amazonaws.com/dev/order/create', {
+    method: 'POST',
+    body: JSON.stringify(orderItem),
+    headers: { 'Content-Type': 'application/json' }
+    })
+    .then(result => result.json())
+    .then(result => res.send('A order added into order-table'))
 })
 
 app.get("/api/fetchdata", (req, res) => {
