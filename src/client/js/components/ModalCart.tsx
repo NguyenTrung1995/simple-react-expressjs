@@ -1,7 +1,6 @@
 import * as React from 'react';
 import FormInput from './FormInput';
 
-// import '../../css/organisms/modal-cart.scss';
 import Button from './Button';
 
 class ModalCart extends React.Component<any, any> {

@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import '../../css/molecules/form-input.scss';
 
 class FormInput extends React.Component<any, any> {
 
