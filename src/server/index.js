@@ -44,20 +44,44 @@ app.get('/api/getInfo', (req, res) => {
   }
 })
 
-app.post("/api/signup", function(req, res) {
-  var name = req.body.name;
-  var email = req.body.email;
-  var password = req.body.password;
-  if(name && email && password) {
-      user.signup(name, email, password)
+const validateByUserName = username => {
+  const user = {
+    username: username
   }
-  else {
-    res.send('Failure');
+  return fetch('https://hbpgpqsys9.execute-api.us-east-2.amazonaws.com/dev/user/get-username', {
+    method: 'POST',
+    body: JSON.stringify(user),
+    headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
+    .catch(err => console.log(err))
+}
+
+app.post("/api/signup", function(req, response) {
+  const user = {
+    username: req.body.username,
+    password: req.body.password
   }
+  const result = validateByUserName(user.username);
+  result
+    .then(res => res.user.Count)
+    .then(res => {
+      if (res === 0) {
+        fetch('https://hbpgpqsys9.execute-api.us-east-2.amazonaws.com/dev/user/create', {
+          method: 'POST',
+          body: JSON.stringify(user),
+          headers: { 'Content-Type': 'application/json' }
+          })
+          .then(result => result.json())
+          .then(result => response.send('Succeed'))
+      }
+      else {
+        return response.send('Failed')
+      }
+    })
 });
 
 app.post("/api/order", function(req, res) {
-
   const orderItem = {
     name: req.body.name,
     phone: req.body.phone,
@@ -65,7 +89,6 @@ app.post("/api/order", function(req, res) {
     address: req.body.address,
     package: req.body.package
   }
-  
   fetch('https://hbpgpqsys9.execute-api.us-east-2.amazonaws.com/dev/order/create', {
     method: 'POST',
     body: JSON.stringify(orderItem),

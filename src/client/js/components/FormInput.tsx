@@ -3,7 +3,8 @@ import * as React from 'react';
 interface Props {
     nameLabel: string,
     nameInput: string,
-    onChangeValue: (e) => void
+    onChangeValue: (e) => void,
+    type?: string
 }
 class FormInput extends React.Component<Props, any> {
 
@@ -15,7 +16,7 @@ class FormInput extends React.Component<Props, any> {
         return (
             <div className="form-input">
                 <label>{this.props.nameLabel}</label>
-                <input type="text" placeholder={this.props.nameInput} onChange={this.props.onChangeValue}></input>
+                <input type={this.props.type === "password" ? "password" : "text"} placeholder={this.props.nameInput} onChange={this.props.onChangeValue}></input>
             </div>
         );
     }

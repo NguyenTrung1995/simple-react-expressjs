@@ -1,68 +1,102 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import FormInput from '../components/FormInput';
+import styled from 'styled-components';
 var md5 = require('md5');
 
-class Signup extends React.Component<any, any> {
+const SignUpContainer = styled.div`
+  text-align: center;
 
+  .form-input {
+    justify-content: center;
+    align-items: center;
+
+    label {
+      margin-right: 10px;
+      margin-bottom: 0;
+    }
+  }
+
+  button {
+    margin-top: 10px;
+  }
+`
+
+const StatusDescription = styled.p<{status: string}>`
+  text-align: center;
+  color: ${props => props.status === 'success' ? 'green' : props.status === 'error' ? 'red' : 'blue'};
+`
+
+class Signup extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.signUp = this.signUp.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
+    // this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.state = {
-        name: '',
-        email: '',
-        password: ''
+        username: '',
+        // email: '',
+        password: '',
+        isRegistered: false,
+        isLoading: false,
+        hasErrored: false
     }
   }
   handleNameChange(e) {
-    this.setState({ name: e.target.value });
+    this.setState({ username: e.target.value });
   }
 
-  handleEmailChange(e) {
-      this.setState({ email: e.target.value });
-  }
+  // handleEmailChange(e) {
+  //     this.setState({ email: e.target.value });
+  // }
 
   handlePasswordChange(e) {
       this.setState({ password: e.target.value });
   }
 
   signUp() {
+    this.setState({isLoading: true});
+    setTimeout(() => {
       axios.post('/api/signup', {
-          name: this.state.name,
-          email: this.state.email,
-          password: md5(this.state.password)
-        })
-        .then(function (response) {
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        username: this.state.username,
+        // email: this.state.email,
+        password: md5(this.state.password)
+      })
+      .then(res => {
+        console.log(res);
+        if (res.data === 'Succeed') {
+          this.setState({isRegistered: true, isLoading: false, hasErrored: false})
+        }
+        else {
+          this.setState({hasErrored: true, isLoading: false});
+        }
+      })
+      .catch(error => {
+        this.setState({hasErrored: true});
+      });
+    }, 1000)
   }
   
   render() {
-      return (
-          <div>
-            <form className="form-signin">
-              <h2 className="form-signin-heading">Please sign up</h2>
-              <label htmlFor="inputName" className="sr-only">Name</label>
-              <input type="name" onChange={this.handleNameChange} id="inputName" className="form-control" placeholder="Name" required autoFocus />
-              <label htmlFor="inputEmail" className="sr-only">Email address</label>
-              <input type="email" onChange={this.handleEmailChange} id="inputEmail" className="form-control" placeholder="Email address" required />
-              <label htmlFor="inputPassword" className="sr-only">Password</label>
-              <input type="password" onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Password" required />
-              
-              <button className="btn btn-lg btn-primary btn-block" onClick={this.signUp} type="button">Sign up</button>
-            </form>
-            <div>
-              <Link to="/">{'Signin'}</Link>
-            </div>
-          </div>    
-      )
+    if (this.state.isLoading) {
+      return (<StatusDescription>Loading...</StatusDescription>)
     }
+    if (this.state.isRegistered) {
+      return (<StatusDescription status="success">Register account successfully!</StatusDescription>)
+    }
+    if (this.state.hasErrored) {
+      return (<StatusDescription status="error">Error register(Maybe username has exist.)</StatusDescription>)
+    }
+    return (
+      <SignUpContainer>
+          <FormInput nameLabel="Username" nameInput="Username" onChangeValue={this.handleNameChange}/>
+          <FormInput type="password" nameLabel="Password" nameInput="Password" onChangeValue={this.handlePasswordChange}/>
+          <button onClick={this.signUp}>Sign Up</button>
+      </SignUpContainer>    
+    );
   }
+}
 
   export default Signup;
