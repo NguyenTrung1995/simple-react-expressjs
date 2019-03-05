@@ -12,16 +12,17 @@ const authorInit = {
     isLogin: false
 }
 
-axios.get('/api/getInfo')
-             .then(res => {
-                 if (res.data) {
-                    authorInit.session = res.data;
-                    authorInit.isLogin = true;
-                 }
-             })
-             .catch(err => {
-                 console.log(err);
-             })
+axios
+    .get('/api/getInfo')
+    .then(res => {
+        if (res.data) {
+        authorInit.session = res.data;
+        authorInit.isLogin = true;
+        }
+    })
+    .catch(err => {
+        console.log(err);
+    })
 
 const login = (state, author) => {
     return {...state, session: author.session, isLogin: true };

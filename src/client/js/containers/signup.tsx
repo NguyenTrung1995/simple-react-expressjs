@@ -65,7 +65,6 @@ class Signup extends React.Component<any, any> {
         password: md5(this.state.password)
       })
       .then(res => {
-        console.log(res);
         if (res.data === 'Succeed') {
           this.setState({isRegistered: true, isLoading: false, hasErrored: false})
         }

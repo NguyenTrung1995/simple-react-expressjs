@@ -5,8 +5,6 @@ const fetch = require('node-fetch');
 
 const app = express();
 
-const user = require('./user.js');
-
 app.use(express.static("dist"));
 app.use(bodyParser.json());
 app.use(session({ 
@@ -16,18 +14,44 @@ app.use(session({
   cookie: { maxAge: 1000*60*60*24 }
 }));
 
-app.post("/api/signin", function(req, res) {
-  var email = req.body.email;
+const checkValidUser = (username, password) => {
+  const user = {
+    username,
+    password
+  }
+  return fetch('https://hbpgpqsys9.execute-api.us-east-2.amazonaws.com/dev/user/check-user', {
+    method: 'POST',
+    body: JSON.stringify(user),
+    headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
+    .catch(err => console.log(err))
+}
+
+app.post("/api/signin", function(req, response) {
+  var username = req.body.username;
   var password = req.body.password;
-  user.validateSignIn(email, password, result => {
-    if (result) {
-      req.session.username = email;
-      res.send(email);
-    }
-    else {
-      res.send('false');
-    }
-  })
+  const result = checkValidUser(username, password);
+  result
+    .then(res => res.result.Count)
+    .then(res => {
+      if (res === 1) {
+        req.session.username = username;
+        response.send(username);
+      }
+      else {
+        response.send('false');
+      }
+    })
+  // user.validateSignIn(email, password, result => {
+  //   if (result) {
+  //     req.session.username = email;
+  //     res.send(email);
+  //   }
+  //   else {
+  //     res.send('false');
+  //   }
+  // })
 });
 
 app.get("/api/signout", (req, res) => {
@@ -64,7 +88,7 @@ app.post("/api/signup", function(req, response) {
   }
   const result = validateByUserName(user.username);
   result
-    .then(res => res.user.Count)
+    .then(res => res.result.Count)
     .then(res => {
       if (res === 0) {
         fetch('https://hbpgpqsys9.execute-api.us-east-2.amazonaws.com/dev/user/create', {
