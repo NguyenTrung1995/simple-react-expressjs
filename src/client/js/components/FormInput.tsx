@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-class FormInput extends React.Component<any, any> {
+interface Props {
+    nameLabel: string,
+    nameInput: string,
+    onChangeValue: (e) => void
+}
+class FormInput extends React.Component<Props, any> {
 
     constructor(props) {
         super(props);

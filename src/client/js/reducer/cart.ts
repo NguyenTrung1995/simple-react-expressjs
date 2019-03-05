@@ -3,7 +3,8 @@ import { reducerWithInitialState } from "typescript-fsa-reducers";
 import {
     addToCart,
     removeFromCart,
-    removeAllFromCart
+    removeAllFromCart,
+    clearCartItem
 } from '../actions';
 
 const cartInitState = [];
@@ -28,7 +29,12 @@ const removeAll = (cart, item) => {
     return [...cartWithoutItem(cart, item)]
 }
 
+const clearCart = () => {
+    return [];
+}
+
 export default reducerWithInitialState(cartInitState)
             .case(addToCart, add)
             .case(removeFromCart, remove)
             .case(removeAllFromCart, removeAll)
+            .case(clearCartItem, clearCart)

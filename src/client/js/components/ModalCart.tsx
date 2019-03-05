@@ -1,10 +1,9 @@
 import * as React from 'react';
 import FormInput from './FormInput';
-
-import Button from './Button';
+import { connect } from 'react-redux';
+import { clearCartItem } from '../actions';
 
 class ModalCart extends React.Component<any, any> {
-    
     constructor(props) {
         super(props);
         this.state =  {
@@ -34,6 +33,8 @@ class ModalCart extends React.Component<any, any> {
 
     public callbackFn = () => {
         this.props.orderFunction(this.state);
+        this.props.clearCartItem();
+        this.props.closeCheckOutModal();
     }
 
     public render() {
@@ -64,4 +65,4 @@ class ModalCart extends React.Component<any, any> {
     }
 }
 
-export default ModalCart;
+export default connect(null, { clearCartItem })(ModalCart);
