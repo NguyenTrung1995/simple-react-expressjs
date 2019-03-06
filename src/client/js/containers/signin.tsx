@@ -1,11 +1,11 @@
 import * as React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router';
+import { fetchSessionUser, handleLogIn } from '../actions';
 import { connect } from 'react-redux';
 var md5 = require('md5');
 
 class Signin extends React.Component<any, any> {
-
     constructor(props) {
         super(props);
         this.signIn = this.signIn.bind(this);
@@ -13,8 +13,7 @@ class Signin extends React.Component<any, any> {
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.state = {
             username: '',
-            password: '',
-            errLogin: false
+            password: ''
         }
     }
 
@@ -26,24 +25,17 @@ class Signin extends React.Component<any, any> {
         this.setState({ password: e.target.value });
     }
 
+    componentDidMount() {
+        this.props.fetchSessionUser();
+    }
+
     signIn() {
-        axios
-            .post('/api/signin', {
-                username: this.state.username,
-                password: md5(this.state.password)
-            })
-            .then((res) => {
-                if (res.data) {
-                    const dispatch = this.props.dispatch;
-                    dispatch({ type: 'LOG_IN' , session: res.data});
-                }
-                else {
-                    this.setState({ errLogin: true, username: '', password: ''})
-                }
-            })
-            .catch((err) => {
-                    console.log('haha' + err);
-            });
+        const user = {
+            username: this.state.username,
+            password: md5(this.state.password)
+        }
+        this.props.handleLogIn(user);
+        // this.setState({ username: '', password: '' });
     }
 
     render() {
@@ -58,7 +50,7 @@ class Signin extends React.Component<any, any> {
                 <label htmlFor="inputPassword" className="sr-only">Mật khẩu</label>
                 <input type="password" value={this.state.password} onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Mật khẩu" required />
                 <button disabled={!checkValidInput} className="btn btn-lg btn-primary btn-block" onClick={this.signIn} type="button">Đăng nhập</button>
-                { this.state.errLogin &&
+                { this.props.isFailed &&
                     <label>Username or password incorrectly</label>
                 }
             </form>
@@ -67,8 +59,8 @@ class Signin extends React.Component<any, any> {
 }
 
 function mapStateToProps(state) {
-    const isLogin = state.login.isLogin;
-    return { isLogin };
+    const {isLogin, isFailed} = state.login;
+    return { isLogin, isFailed };
 }
 
-export default connect(mapStateToProps)(Signin);
+export default connect(mapStateToProps, { fetchSessionUser, handleLogIn })(Signin);

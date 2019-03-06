@@ -1,13 +1,18 @@
 import { reducerWithInitialState } from "typescript-fsa-reducers";
-import {loginAction, logoutAction} from '../actions';
+import {loginAction, logoutAction, loginFailedAction} from '../actions';
 
 const authorInit = {
     session: undefined,
-    isLogin: false
+    isLogin: false,
+    isFailed: false
+}
+
+const loginFailed = (state) => {
+    return {...state, isFailed: true};
 }
 
 const login = (state, session) => {
-    return {...state, session, isLogin: true };
+    return {...state, session, isLogin: true, isFailed: false };
 }
 
 const logout = (state) => {
@@ -17,3 +22,4 @@ const logout = (state) => {
 export default reducerWithInitialState(authorInit)
                 .case(loginAction, login)
                 .case(logoutAction, logout)
+                .case(loginFailedAction, loginFailed)
