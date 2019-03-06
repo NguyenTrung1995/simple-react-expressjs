@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Menu from './Menu';
 import Cart from '../containers/cart/cart';
+import { connect } from 'react-redux';
 
 class Header extends React.Component<any, any> {
     
@@ -38,7 +39,8 @@ class Header extends React.Component<any, any> {
             <div className="header__container">
                 <div className="header__top">
                     <span className="header__icon-menu" onClick={this.openMenu}></span>
-                    <Link to="/" className="header__title">Daniel Wellington</Link>
+                    {/* <Link to="/" className="header__title">Daniel Wellington</Link> */}
+                    <Link to="/" className="header__title">{this.props.session ? this.props.session : 'undefined'}</Link>
                     <span className="header__icon-cart" onClick={this.openCart}></span>
                     <Menu
                         isToggled={this.state.isToggleMenu}
@@ -55,4 +57,8 @@ class Header extends React.Component<any, any> {
     }
 }
 
-export default Header;
+const mapStateToProps = state => ({
+    session: state.login.session
+})
+
+export default connect(mapStateToProps)(Header);

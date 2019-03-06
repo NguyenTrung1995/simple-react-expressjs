@@ -1,35 +1,17 @@
-import axios from "axios";
-
 import { reducerWithInitialState } from "typescript-fsa-reducers";
-
-import {
-    loginAction,
-    logoutAction
-} from '../actions';
+import {loginAction, logoutAction} from '../actions';
 
 const authorInit = {
-    session: '',
+    session: undefined,
     isLogin: false
 }
 
-axios
-    .get('/api/getInfo')
-    .then(res => {
-        if (res.data) {
-        authorInit.session = res.data;
-        authorInit.isLogin = true;
-        }
-    })
-    .catch(err => {
-        console.log(err);
-    })
-
-const login = (state) => {
-    return {...state, session: state.session, isLogin: true };
+const login = (state, session) => {
+    return {...state, session, isLogin: true };
 }
 
 const logout = (state) => {
-    return {...state, session: '', isLogin: false };
+    return {...state, session: undefined, isLogin: false };
 }
 
 export default reducerWithInitialState(authorInit)

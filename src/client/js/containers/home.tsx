@@ -1,12 +1,13 @@
 import * as React from 'react';
 import ProductListItem from './product/product-list-item';
-import { itemsFetchData } from '../actions/items';
+import { itemsFetchData, fetchSessionUser } from '../actions';
 import { connect } from 'react-redux';
 
 class Home extends React.Component<any, any> {
 
     componentDidMount() {
         this.props.fetchData('/api/fetchdata');
+        this.props.fetchSession();
     }
 
     showError = () => (<p>Sorry! There was an error loading the items</p>);
@@ -30,7 +31,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchData: url => dispatch(itemsFetchData(url)) 
+    fetchData: url => dispatch(itemsFetchData(url)),
+    fetchSession: () => dispatch(fetchSessionUser()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

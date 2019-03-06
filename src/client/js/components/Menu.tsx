@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logoutAction } from '../actions';
+import { dispatchLogOut } from '../actions';
 import styled from 'styled-components';
 
 const LogoutElement = styled.li`
@@ -16,7 +16,7 @@ class Menu extends React.Component<any, any> {
     }
     
     handleLogOut = () => {
-        this.props.logoutAction();
+        this.props.dispatchLogOut();
     }
 
     render() {
@@ -48,4 +48,4 @@ const mapStateToProps = state => {
     return { isLogin };
 }
 
-export default connect(mapStateToProps, { logoutAction })(Menu);
+export default connect(mapStateToProps, { dispatchLogOut })(Menu);
