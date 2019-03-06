@@ -23,7 +23,7 @@ const SignUpContainer = styled.div`
   }
 `
 
-const StatusDescription = styled.p<{status: string}>`
+const StatusDescription = styled.p<{status?: string}>`
   text-align: center;
   color: ${props => props.status === 'success' ? 'green' : props.status === 'error' ? 'red' : 'blue'};
 `
