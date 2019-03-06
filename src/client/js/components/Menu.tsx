@@ -1,13 +1,25 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logoutAction } from '../actions';
+import styled from 'styled-components';
+
+const LogoutElement = styled.li`
+    cursor: pointer;
+    font-size: 24px;
+    letter-spacing: 0.1cm;
+`
 
 class Menu extends React.Component<any, any> {
     constructor(props) {
         super(props);
     }
+    
+    handleLogOut = () => {
+        this.props.logoutAction();
+    }
 
     render() {
-        const menu_list = ['NEWS', 'WATCHES', 'ACCESSORIES', 'WATCH BANDS'];
         const className = "menu__wrapper";
         return (
             <div className={ this.props.isToggled ? className + " is-toggled" : className }>
@@ -15,10 +27,15 @@ class Menu extends React.Component<any, any> {
                     <span className="menu-close" onClick={this.props.closeMenu} />
                 </div>
                 <ul className="menu__list">
-                    {
-                        menu_list.map((value, index) => {
-                            return <li key={index}><Link to="#">{value}</Link></li>
-                        })
+                    <li><Link to="/news">NEWS</Link></li>
+                    <li><Link to="/watches">WATCHES</Link></li>
+                    <li><Link to="/accessories">ACCESSORIES</Link></li>
+                    <li><Link to="/watch-bands">WATCH BANDS</Link></li>
+                    {!this.props.isLogin && 
+                        <li><Link to="/signin">LOGIN</Link></li>
+                    }
+                    {this.props.isLogin &&
+                        <LogoutElement onClick={this.handleLogOut}>LOGOUT</LogoutElement>
                     }
                 </ul>
             </div>
@@ -26,4 +43,9 @@ class Menu extends React.Component<any, any> {
     }
 }
 
-export default Menu;
+const mapStateToProps = state => {
+    const isLogin = state.login.isLogin;
+    return { isLogin };
+}
+
+export default connect(mapStateToProps, { logoutAction })(Menu);
