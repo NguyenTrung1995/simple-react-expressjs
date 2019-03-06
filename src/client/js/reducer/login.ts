@@ -24,8 +24,8 @@ axios
         console.log(err);
     })
 
-const login = (state, author) => {
-    return {...state, session: author.session, isLogin: true };
+const login = (state) => {
+    return {...state, session: state.session, isLogin: true };
 }
 
 const logout = (state) => {

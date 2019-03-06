@@ -27,36 +27,37 @@ class Signin extends React.Component<any, any> {
     }
 
     signIn() {
-        axios.post('/api/signin', {
-            username: this.state.username,
-            password: md5(this.state.password)
-          })
-          .then((res) => {
-            console.log(res.data);
-            if (res.data) {
-                const dispatch = this.props.dispatch;
-                dispatch({ type: 'LOG_IN' , session: res.data});
-            }
-            else {
-                this.setState({ errLogin: true })
-            }
-          })
-          .catch((err) => {
-                console.log(err);
-          });
+        axios
+            .post('/api/signin', {
+                username: this.state.username,
+                password: md5(this.state.password)
+            })
+            .then((res) => {
+                if (res.data) {
+                    const dispatch = this.props.dispatch;
+                    dispatch({ type: 'LOG_IN' , session: res.data});
+                }
+                else {
+                    this.setState({ errLogin: true, username: '', password: ''})
+                }
+            })
+            .catch((err) => {
+                    console.log('haha' + err);
+            });
     }
 
     render() {
+        const checkValidInput = this.state.username !== '' && this.state.password !== '';
         return (
             this.props.isLogin ? <Redirect to="/" /> :
             <form className="form-signin">
                 <h2 className="form-signin-heading">Đăng nhập</h2>
                 <label htmlFor="inputEmail" className="sr-only">Nhập địa chỉ email
                 </label>
-                <input type="text" onChange={this.handleUserNameChange} id="inputEmail" className="form-control" placeholder="Email" required autoFocus />
+                <input type="text" value={this.state.username} onChange={this.handleUserNameChange} id="inputEmail" className="form-control" placeholder="Email" required autoFocus />
                 <label htmlFor="inputPassword" className="sr-only">Mật khẩu</label>
-                <input type="password" onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Mật khẩu" required />
-                <button className="btn btn-lg btn-primary btn-block" onClick={this.signIn} type="button">Đăng nhập</button>
+                <input type="password" value={this.state.password} onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Mật khẩu" required />
+                <button disabled={!checkValidInput} className="btn btn-lg btn-primary btn-block" onClick={this.signIn} type="button">Đăng nhập</button>
                 { this.state.errLogin &&
                     <label>Username or password incorrectly</label>
                 }
