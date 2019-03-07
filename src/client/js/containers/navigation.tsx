@@ -23,6 +23,7 @@ class Navigation extends React.Component<any, any> {
             <ul>
                 <li><Link to="/">Navigating</Link></li>
                 <li><Link to="/account">Account</Link></li>
+                <li><Link to="/upload">Upload</Link></li>
                 <li><Link to="/signup">Signup</Link></li>
                 <li><Link to="/styleguide">Style Guide</Link></li>
                 <li><a onClick={this.signOut}>Sign Out</a></li>

@@ -19,6 +19,7 @@ import Account from "./js/containers/account";
 import Cart from "./js/containers/cart/cart";
 import Header from "./js/components/Header";
 import DetailProduct from "./js/containers/product_detail";
+import UpLoadImage from "./js/containers/UpLoadImage";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
@@ -29,14 +30,15 @@ ReactDOM.render(
                 {/* <Navigation/> */}
                 <Header />
                 <Switch>
-                    <Route exact={true} path='/' component={Root}/>
+                    <Route exact path='/' component={Root}/>
                     <Route path='/home' component={Home}/>
                     <Route path='/account' component={Account}/>
                     <Route path='/signin' component={Signin}/>
                     <Route path='/signup' component={Signup}/>
                     <Route path='/cart' component={Cart}/>
                     <Route path='/styleguide' component={StyleGuide}/>
-                    <Route path="/:product_name" component={DetailProduct}/>
+                    <Route path='/:product_name' component={DetailProduct}/>
+                    <Route path='/upload' component={UpLoadImage}/>
                     <Route component={Error}/>
                 </Switch>
             </div>
