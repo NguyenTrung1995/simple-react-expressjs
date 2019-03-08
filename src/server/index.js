@@ -1,12 +1,15 @@
 const express = require("express");
-var bodyParser = require("body-parser");
-var session = require('express-session');
-var apis = require('./api');
+const bodyParser = require("body-parser");
+const session = require('express-session');
+const fileUpload = require('express-fileupload');
+const apis = require('./api');
+const upload = require('./upload');
 
 const app = express();
 
 app.use(express.static("dist"));
 app.use(bodyParser.json());
+app.use(fileUpload());
 app.use(session({ 
   secret: 'keyboard cat',
   resave: false,
@@ -15,5 +18,6 @@ app.use(session({
 }));
 
 app.use('/api', apis);
+app.use('/api/upload', upload);
 
 app.listen(5000, () => console.log("Listening on port 5000!"));

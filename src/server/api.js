@@ -1,6 +1,6 @@
-var express = require('express');
+const express = require('express');
 const fetch = require('node-fetch');
-var router = express.Router();
+const router = express.Router();
 
 const checkValidUser = (username, password) => {
     const user = {
