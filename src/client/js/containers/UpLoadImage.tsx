@@ -27,12 +27,10 @@ class UpLoadImage extends React.Component<any, any> {
                 },
             })
             .then(res => {
-                console.log(res.statusText)
+                console.log(res)
             })
-    
     }
     render() {
-        console.log('haha');
         return (
             <div>
                 <input type="file" name="" id="" onChange={this.handleselectedFile.bind(this)} />
