@@ -68,21 +68,21 @@ router.post("/signup", function(req, response) {
     }
     const result = validateByUserName(user.username);
     result
-      .then(res => res.result.Count)
-      .then(res => {
-        if (res === 0) {
-          fetch('https://hbpgpqsys9.execute-api.us-east-2.amazonaws.com/dev/user/create', {
-                method: 'POST',
-                body: JSON.stringify(user),
-                headers: { 'Content-Type': 'application/json' }
-            })
-            .then(result => result.json())
-            .then(result => response.send('Succeed'))
-        }
-        else {
-          return response.send('Failed')
-        }
-      })
+        .then(res => res.result.Count)
+        .then(res => {
+            if (res === 0) {
+                fetch('https://hbpgpqsys9.execute-api.us-east-2.amazonaws.com/dev/user/create', {
+                        method: 'POST',
+                        body: JSON.stringify(user),
+                        headers: { 'Content-Type': 'application/json' }
+                    })
+                    .then(result => result.json())
+                    .then(result => response.send('Succeed'))
+            }
+            else {
+                return response.send('Failed')
+            }
+        })
 });
 
 router.post("/order", function(req, res) {
