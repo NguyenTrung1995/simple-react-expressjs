@@ -24,11 +24,11 @@ router.post("/signin", function(req, response) {
         .then(res => res.result.Count)
         .then(res => {
             if (res === 1) {
-            req.session.username = username;
-            response.send(username);
+                req.session.username = username;
+                response.send(username);
             }
             else {
-            response.send('false');
+                response.send('false');
             }
         })
 });

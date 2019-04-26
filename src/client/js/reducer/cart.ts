@@ -15,14 +15,14 @@ const itemInCart = (cart, item) => cart.filter(cartItem => cartItem.id === item.
 const add = (cart, item) => {
     const cartItem = itemInCart(cart, item);
     return cartItem === undefined 
-        ? [...cartWithoutItem(cart, item), {...item, quantity: 1}]
-        : [...cartWithoutItem(cart, item), {...cartItem, quantity: cartItem.quantity + 1}]
+        ? [...cart, {...item, quantity: 1}]
+        : cart.map(x => x.id === cartItem.id ? {...x, quantity: x.quantity + 1} : x);
 }
 
 const remove = (cart, item) => {
     return item.quantity === 1
         ? [...cartWithoutItem(cart, item)]
-        : [...cartWithoutItem(cart, item), {...item, quantity: item.quantity - 1}]
+        : cart.map(x => x.id === item.id ? {...x, quantity: x.quantity - 1} : x);
 }
 
 const removeAll = (cart, item) => {

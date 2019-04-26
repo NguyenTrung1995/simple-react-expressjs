@@ -45,7 +45,7 @@ class Cart extends React.Component<any, any> {
             return accumulator + currentItem.quantity * currentItem.price;
         }, 0);
         const classNameCart = "mini-cart";
-        const cartItems = this.props.cart.sort((a, b) => a.id - b.id);
+        const cartItems = this.props.cart;
         return (
             <div className={this.props.isToggleCart ? classNameCart + " isToggleCart" : classNameCart}>
                 <div className="mini-cart__top">
